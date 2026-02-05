@@ -3,227 +3,310 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bem-vinda, Mãe!</title>
-    <!-- Tailwind CSS para estilização rápida e bonita -->
+    <title>Para Minha Rainha ❤️</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Fontes do Google -->
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
-    <!-- Ícones -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
 
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'love-pink': '#ff758c',
-                        'love-red': '#ff7eb3',
-                        'soft-cream': '#fff0f3',
-                    },
-                    fontFamily: {
-                        'handwriting': ['"Great Vibes"', 'cursive'],
-                        'body': ['"Montserrat"', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-
     <style>
-        /* Animações personalizadas */
+        /* Desabilitar seleção de texto e scroll suave */
+        * {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: #fff0f3;
+            font-family: 'Poppins', sans-serif;
+            background: #fff5f7;
             overflow-x: hidden;
+            margin: 0;
+            font-size: 0.95rem; /* Interface levemente menor */
         }
 
-        .hero-text {
-            font-family: 'Great Vibes', cursive;
+        .font-love { font-family: 'Great Vibes', cursive; }
+
+        /* Avião Corrigido com Rotação em Perspectiva */
+        .orbit-container {
+            position: relative;
+            width: 260px; /* Reduzido */
+            height: 260px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1000px;
         }
 
-        /* Animação dos Corações Caindo */
-        .heart {
+        .plane-orbit {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            animation: rotate3D 6s linear infinite;
+            transform-style: preserve-3d;
+        }
+
+        .plane-icon {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%) rotateY(0deg) rotateZ(90deg);
+            font-size: 2.2rem;
+            color: #ff758c;
+            filter: drop-shadow(0 5px 15px rgba(255, 117, 140, 0.4));
+        }
+
+        @keyframes rotate3D {
+            0% { transform: rotateZ(0deg) rotateX(20deg); }
+            100% { transform: rotateZ(360deg) rotateX(20deg); }
+        }
+
+        /* Corações Caindo */
+        .floating-heart {
             position: fixed;
-            top: -10vh;
-            color: #ff4d6d;
-            opacity: 0.8;
-            z-index: 0; /* Atrás do texto principal, mas visível */
-            animation: fall linear forwards;
-            pointer-events: none; /* Não interfere no clique */
+            pointer-events: none;
+            z-index: 50;
+            animation: float linear forwards;
         }
 
-        @keyframes fall {
-            to {
-                transform: translateY(110vh) rotate(360deg);
-            }
+        @keyframes float {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
         }
 
-        /* Animação de entrada suave */
-        .fade-in-up {
-            animation: fadeInUp 1.5s ease-out;
+        /* Efeito de Aura Pulsante (Loop) */
+        .aura-btn {
+            position: relative;
+            z-index: 1;
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .aura-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 117, 140, 0.6);
+            border-radius: inherit;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            animation: aura-pulse 2s infinite;
         }
 
-        .glass-card {
+        @keyframes aura-pulse {
+            0% { width: 100%; height: 100%; opacity: 0.8; }
+            100% { width: 140%; height: 160%; opacity: 0; }
+        }
+
+        /* Glassmorphism */
+        .glass {
             background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.5);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+            border-radius: 2rem;
         }
 
-        /* Botão pulsante */
-        .pulse-btn {
-            animation: pulse-animation 2s infinite;
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1s ease-out;
         }
 
-        @keyframes pulse-animation {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 117, 140, 0.7); }
-            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(255, 117, 140, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 117, 140, 0); }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Modal dos 1000 motivos */
+        #modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        #motivos-container {
+            max-height: 45vh;
+            overflow-y: auto;
+        }
+
+        #motivos-container::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        #motivos-container::-webkit-scrollbar-thumb {
+            background: #ff758c;
+            border-radius: 10px;
         }
     </style>
 </head>
-<body class="text-gray-700 relative">
+<body class="text-gray-800">
 
-    <!-- Container dos corações (gerado via JS) -->
-    <div id="hearts-container"></div>
-
-    <!-- Seção Hero (Boas Vindas) -->
-    <header class="min-h-screen flex flex-col justify-center items-center text-center p-6 relative z-10 bg-gradient-to-b from-transparent to-soft-cream">
-        <div class="fade-in-up">
-            <div class="mb-4 inline-block p-3 rounded-full bg-white shadow-lg">
-                <i class="fa-solid fa-plane-arrival text-4xl text-love-pink animate-bounce"></i>
+    <!-- Hero Section -->
+    <section class="min-h-screen flex flex-col justify-center items-center p-6 text-center relative overflow-hidden">
+        <div class="orbit-container mb-10">
+            <div class="plane-orbit">
+                <i class="fa-solid fa-paper-plane plane-icon"></i>
             </div>
-            <h2 class="text-2xl md:text-3xl font-light tracking-widest text-gray-500 mb-2">DA ALEMANHA PARA O BRASIL</h2>
-            <h1 class="hero-text text-6xl md:text-8xl lg:text-9xl text-love-pink mb-6 drop-shadow-md">
-                Bem Vinda<br>Mãezinha!
-            </h1>
-            <p class="text-lg md:text-2xl max-w-2xl mx-auto font-light leading-relaxed text-gray-600">
-                O Brasil ficou mais colorido e nossos corações finalmente estão completos com a sua chegada.
-            </p>
-            <div class="mt-10">
-                <a href="#mensagens" class="pulse-btn bg-love-pink text-white px-8 py-4 rounded-full font-bold text-lg shadow-lg hover:bg-love-red transition duration-300">
-                    <i class="fa-solid fa-heart mr-2"></i> Ler com amor
-                </a>
+            <div class="z-10 bg-white p-8 rounded-full shadow-2xl border-2 border-pink-50">
+                <i class="fa-solid fa-heart text-5xl text-pink-500 animate-pulse"></i>
             </div>
         </div>
-    </header>
 
-    <!-- Seção de Mensagem Principal -->
-    <section id="mensagens" class="py-20 px-4 md:px-10 z-10 relative">
-        <div class="max-w-4xl mx-auto glass-card rounded-3xl p-8 md:p-12 text-center">
-            <h3 class="hero-text text-5xl text-love-pink mb-8">Mãe, você é meu mundo</h3>
-            
-            <p class="text-lg md:text-xl leading-8 mb-6 text-gray-700">
-                Mãezinha linda e maravilhosa, não existem palavras em português (e nem em alemão!) suficientes para descrever a felicidade que estou sentindo em te ter por perto novamente. A casa parecia vazia sem a sua alegria e o seu carinho.
-            </p>
-            
-            <p class="text-lg md:text-xl leading-8 mb-8 text-gray-700">
-                Preparei tudo com muito amor, contando os segundos para te dar aquele abraço apertado que cura qualquer saudade. Esqueça o cansaço da viagem, agora é hora de ser mimada!
-            </p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-                <!-- Card 1 -->
-                <div class="bg-white p-6 rounded-2xl shadow-md hover:transform hover:-translate-y-2 transition duration-300">
-                    <div class="text-4xl text-love-pink mb-4"><i class="fa-solid fa-house-chimney-heart"></i></div>
-                    <h4 class="font-bold text-xl mb-2">Sua Casa</h4>
-                    <p class="text-sm text-gray-500">Que saudade que a gente estava de ver você andando por aqui.</p>
+        <h1 class="font-love text-6xl md:text-8xl text-pink-500 mb-4">Seja bem-vinda!</h1>
+        <p class="text-lg md:text-2xl text-pink-400 font-light max-w-lg px-4">
+            A saudade era do tamanho do oceano que você atravessou. <br>
+            <span class="text-base opacity-80 italic">Que bom que você voltou para nós.</span>
+        </p>
+
+        <a href="#conteudo" class="aura-btn mt-10 bg-pink-500 text-white px-10 py-3 rounded-full shadow-lg transition-all flex items-center gap-2 font-semibold">
+            Ler com amor <i class="fa-solid fa-chevron-down animate-bounce"></i>
+        </a>
+    </section>
+
+    <!-- Frase Espalhada -->
+    <div class="text-center py-6 reveal">
+        <span class="font-love text-3xl text-pink-300 italic">"Mãe: onde a vida começa e o amor nunca termina."</span>
+    </div>
+
+    <!-- Seção de Mensagens -->
+    <section id="conteudo" class="py-16 px-6 space-y-16">
+        
+        <div class="max-w-3xl mx-auto glass p-8 md:p-12 reveal">
+            <h2 class="font-love text-5xl text-pink-500 mb-8 text-center">Para a Mulher da Minha Vida</h2>
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="space-y-4 text-base leading-relaxed text-gray-600 text-justify">
+                    <p>Mãe, enquanto você estava na Alemanha, cada canto desta casa sentia sua falta. O café não tinha o mesmo cheiro, e as risadas não tinham o mesmo som.</p>
+                    <p>Você é a minha maior inspiração. Ver você viajando e agora voltando para nós é o maior presente que eu poderia receber.</p>
                 </div>
-                <!-- Card 2 -->
-                <div class="bg-white p-6 rounded-2xl shadow-md hover:transform hover:-translate-y-2 transition duration-300">
-                    <div class="text-4xl text-love-pink mb-4"><i class="fa-solid fa-utensils"></i></div>
-                    <h4 class="font-bold text-xl mb-2">Comida de Mãe</h4>
-                    <p class="text-sm text-gray-500">Já estamos sonhando com aquelas delícias que só você sabe fazer (mas hoje, a gente cozinha!).</p>
+                <div class="bg-pink-50 p-6 rounded-2xl border-2 border-dashed border-pink-200">
+                    <p class="text-pink-600 font-semibold italic text-center text-sm">
+                        "Não importa quantos quilômetros existam entre nós, meu coração sempre estará batendo no mesmo ritmo que o seu."
+                    </p>
                 </div>
-                <!-- Card 3 -->
-                <div class="bg-white p-6 rounded-2xl shadow-md hover:transform hover:-translate-y-2 transition duration-300">
-                    <div class="text-4xl text-love-pink mb-4"><i class="fa-solid fa-infinity"></i></div>
-                    <h4 class="font-bold text-xl mb-2">Amor Eterno</h4>
-                    <p class="text-sm text-gray-500">A distância separa corpos, mas nunca corações. Te amo demais!</p>
-                </div>
+            </div>
+
+            <div class="mt-12 flex flex-col items-center">
+                <button onclick="abrirMotivos()" class="aura-btn bg-gradient-to-r from-pink-500 to-rose-400 text-white px-8 py-4 rounded-xl shadow-xl font-bold flex items-center gap-3">
+                    <i class="fa-solid fa-wand-magic-sparkles text-xl"></i> 
+                    1000 Motivos para te Amar
+                </button>
+            </div>
+        </div>
+
+        <!-- Cards Menores -->
+        <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 px-4">
+            <div class="glass p-6 text-center reveal">
+                <i class="fa-solid fa-crown text-2xl text-yellow-400 mb-2"></i>
+                <h4 class="font-bold text-sm mb-1 uppercase tracking-tighter">Minha Rainha</h4>
+                <p class="text-xs text-gray-500">Você governa nosso lar com amor.</p>
+            </div>
+            <div class="glass p-6 text-center reveal">
+                <i class="fa-solid fa-sun text-2xl text-orange-400 mb-2"></i>
+                <h4 class="font-bold text-sm mb-1 uppercase tracking-tighter">Meu Sol</h4>
+                <p class="text-xs text-gray-500">Seu sorriso ilumina meu caminho.</p>
+            </div>
+            <div class="glass p-6 text-center reveal">
+                <i class="fa-solid fa-anchor text-2xl text-blue-400 mb-2"></i>
+                <h4 class="font-bold text-sm mb-1 uppercase tracking-tighter">Meu Porto Seguro</h4>
+                <p class="text-xs text-gray-500">Nos seus braços encontro paz.</p>
             </div>
         </div>
     </section>
 
-    <!-- Galeria Simples (Decorativa) -->
-    <section class="py-10 pb-20 z-10 relative">
-        <div class="max-w-6xl mx-auto px-4 text-center">
-            <h3 class="hero-text text-5xl text-love-pink mb-10">Momentos Especiais</h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <!-- Imagens Placeholder (substitua por fotos reais se desejar editar o código) -->
-                <div class="relative group overflow-hidden rounded-xl shadow-lg h-64">
-                    <img src="https://images.unsplash.com/photo-1490750967868-58cb75063ed4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Flores" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
-                    <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
-                        <span class="text-white font-bold text-lg">Amor</span>
-                    </div>
-                </div>
-                <div class="relative group overflow-hidden rounded-xl shadow-lg h-64 md:-mt-8">
-                    <img src="https://images.unsplash.com/photo-1516572571765-6677443e06a5?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Carinho" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
-                    <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
-                        <span class="text-white font-bold text-lg">Família</span>
-                    </div>
-                </div>
-                <div class="relative group overflow-hidden rounded-xl shadow-lg h-64">
-                    <img src="https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Saudade" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
-                    <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
-                        <span class="text-white font-bold text-lg">União</span>
-                    </div>
-                </div>
+    <!-- Modal de Motivos -->
+    <div id="modal">
+        <div class="bg-white w-full max-w-lg rounded-[2.5rem] p-8 relative shadow-2xl border-4 border-pink-50">
+            <button onclick="fecharModal()" class="absolute -top-3 -right-3 bg-white text-pink-500 w-10 h-10 rounded-full flex items-center justify-center shadow-md border border-pink-100">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <div class="text-center mb-4">
+                <h3 class="font-love text-4xl text-pink-500">Meus 1000 Motivos</h3>
+            </div>
+
+            <div id="motivos-container" class="space-y-2">
+                <!-- Injetado via JS -->
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-pink-100 text-center">
+                <p class="text-pink-500 font-bold italic text-sm">
+                    "E o principal, nenhum desses motivos é o suficiente para descrever o tanto que eu amo você ❤️🌹"
+                </p>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- Footer em Alemão/Português -->
-    <footer class="bg-white py-8 text-center border-t border-pink-100 z-10 relative">
-        <p class="text-2xl text-gray-400 font-light mb-2">Willkommen zurück!</p>
-        <p class="text-love-pink hero-text text-4xl">Te amo infinitamente.</p>
-        <p class="text-xs text-gray-300 mt-4">Feito com muito amor pelo seu filho(a)</p>
+    <!-- Rodapé -->
+    <footer class="py-16 text-center">
+        <div class="reveal px-6">
+            <div class="font-love text-4xl text-pink-500 max-w-2xl mx-auto leading-tight">
+                Obrigado por ser a melhor mãe do universo.
+            </div>
+            <div class="mt-8 flex justify-center gap-4 text-pink-300">
+                <i class="fa-solid fa-heart animate-bounce"></i>
+                <i class="fa-solid fa-heart animate-bounce" style="animation-delay: 0.2s"></i>
+                <i class="fa-solid fa-heart animate-bounce" style="animation-delay: 0.4s"></i>
+            </div>
+        </div>
     </footer>
 
-    <!-- Script para os Corações -->
     <script>
-        function createHeart() {
+        // Revelação
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Corações
+        function spawnHeart() {
             const heart = document.createElement('div');
-            heart.classList.add('heart');
-            
-            // Escolher aleatoriamente entre ícones de coração e emojis
-            const icons = ['❤️', '💖', '🌸', '✨', '💗'];
-            heart.innerText = icons[Math.floor(Math.random() * icons.length)];
-            
-            // Posição horizontal aleatória
+            heart.className = 'floating-heart';
+            heart.innerText = ['❤️', '💖', '💗', '💓', '✨', '🌹'][Math.floor(Math.random() * 6)];
             heart.style.left = Math.random() * 100 + 'vw';
-            
-            // Tamanho aleatório
-            const size = Math.random() * 20 + 10 + 'px'; // Entre 10px e 30px
-            heart.style.fontSize = size;
-            
-            // Duração da animação aleatória (velocidade de queda)
-            heart.style.animationDuration = Math.random() * 3 + 3 + 's'; // Entre 3s e 6s
-            
+            heart.style.fontSize = (Math.random() * 15 + 10) + 'px';
+            heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
             document.body.appendChild(heart);
-            
-            // Remover o coração do DOM após a animação terminar para não pesar o site
-            setTimeout(() => {
-                heart.remove();
-            }, 6000);
+            setTimeout(() => heart.remove(), 7000);
+        }
+        setInterval(spawnHeart, 400);
+
+        // 1000 Motivos
+        function gerarMotivos() {
+            const container = document.getElementById('motivos-container');
+            container.innerHTML = '';
+            const ab = ["Pelo seu ", "Pela sua ", "Por você ser ", "Pelo jeito "];
+            const sub = ["sorriso ", "abraço ", "carinho ", "apoio ", "paciência ", "olhar "];
+            const adj = ["doce ", "único ", "forte ", "alegre ", "gentil "];
+            const comp = ["que me salva.", "que ilumina tudo.", "que me faz bem.", "que é meu refúgio."];
+
+            for (let i = 1; i <= 1000; i++) {
+                const p = document.createElement('p');
+                p.className = "bg-pink-50/40 p-2 rounded-lg text-xs border-l-2 border-pink-200 text-gray-600";
+                const frase = ab[i%4] + sub[i%6] + adj[i%5] + comp[i%4];
+                p.innerHTML = `<span class="text-pink-500 font-bold mr-1">${i}.</span> ${frase}`;
+                container.appendChild(p);
+            }
         }
 
-        // Criar um coração a cada 300ms
-        setInterval(createHeart, 300);
+        function abrirMotivos() {
+            document.getElementById('modal').style.display = 'flex';
+            gerarMotivos();
+            document.body.style.overflow = 'hidden';
+        }
 
-        // Chuva inicial de corações ao carregar
-        for(let i = 0; i < 20; i++) {
-            setTimeout(createHeart, i * 100);
+        function fecharModal() {
+            document.getElementById('modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
         }
     </script>
 </body>
