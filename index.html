@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bem-vinda, Mãe!</title>
+    <!-- Tailwind CSS para estilização rápida e bonita -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fontes do Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Ícones -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'love-pink': '#ff758c',
+                        'love-red': '#ff7eb3',
+                        'soft-cream': '#fff0f3',
+                    },
+                    fontFamily: {
+                        'handwriting': ['"Great Vibes"', 'cursive'],
+                        'body': ['"Montserrat"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Animações personalizadas */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #fff0f3;
+            overflow-x: hidden;
+        }
+
+        .hero-text {
+            font-family: 'Great Vibes', cursive;
+        }
+
+        /* Animação dos Corações Caindo */
+        .heart {
+            position: fixed;
+            top: -10vh;
+            color: #ff4d6d;
+            opacity: 0.8;
+            z-index: 0; /* Atrás do texto principal, mas visível */
+            animation: fall linear forwards;
+            pointer-events: none; /* Não interfere no clique */
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(360deg);
+            }
+        }
+
+        /* Animação de entrada suave */
+        .fade-in-up {
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+        }
+
+        /* Botão pulsante */
+        .pulse-btn {
+            animation: pulse-animation 2s infinite;
+        }
+
+        @keyframes pulse-animation {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 117, 140, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(255, 117, 140, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 117, 140, 0); }
+        }
+    </style>
+</head>
+<body class="text-gray-700 relative">
+
+    <!-- Container dos corações (gerado via JS) -->
+    <div id="hearts-container"></div>
+
+    <!-- Seção Hero (Boas Vindas) -->
+    <header class="min-h-screen flex flex-col justify-center items-center text-center p-6 relative z-10 bg-gradient-to-b from-transparent to-soft-cream">
+        <div class="fade-in-up">
+            <div class="mb-4 inline-block p-3 rounded-full bg-white shadow-lg">
+                <i class="fa-solid fa-plane-arrival text-4xl text-love-pink animate-bounce"></i>
+            </div>
+            <h2 class="text-2xl md:text-3xl font-light tracking-widest text-gray-500 mb-2">DA ALEMANHA PARA O BRASIL</h2>
+            <h1 class="hero-text text-6xl md:text-8xl lg:text-9xl text-love-pink mb-6 drop-shadow-md">
+                Bem Vinda<br>Mãezinha!
+            </h1>
+            <p class="text-lg md:text-2xl max-w-2xl mx-auto font-light leading-relaxed text-gray-600">
+                O Brasil ficou mais colorido e nossos corações finalmente estão completos com a sua chegada.
+            </p>
+            <div class="mt-10">
+                <a href="#mensagens" class="pulse-btn bg-love-pink text-white px-8 py-4 rounded-full font-bold text-lg shadow-lg hover:bg-love-red transition duration-300">
+                    <i class="fa-solid fa-heart mr-2"></i> Ler com amor
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Seção de Mensagem Principal -->
+    <section id="mensagens" class="py-20 px-4 md:px-10 z-10 relative">
+        <div class="max-w-4xl mx-auto glass-card rounded-3xl p-8 md:p-12 text-center">
+            <h3 class="hero-text text-5xl text-love-pink mb-8">Mãe, você é meu mundo</h3>
+            
+            <p class="text-lg md:text-xl leading-8 mb-6 text-gray-700">
+                Mãezinha linda e maravilhosa, não existem palavras em português (e nem em alemão!) suficientes para descrever a felicidade que estou sentindo em te ter por perto novamente. A casa parecia vazia sem a sua alegria e o seu carinho.
+            </p>
+            
+            <p class="text-lg md:text-xl leading-8 mb-8 text-gray-700">
+                Preparei tudo com muito amor, contando os segundos para te dar aquele abraço apertado que cura qualquer saudade. Esqueça o cansaço da viagem, agora é hora de ser mimada!
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+                <!-- Card 1 -->
+                <div class="bg-white p-6 rounded-2xl shadow-md hover:transform hover:-translate-y-2 transition duration-300">
+                    <div class="text-4xl text-love-pink mb-4"><i class="fa-solid fa-house-chimney-heart"></i></div>
+                    <h4 class="font-bold text-xl mb-2">Sua Casa</h4>
+                    <p class="text-sm text-gray-500">Que saudade que a gente estava de ver você andando por aqui.</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-white p-6 rounded-2xl shadow-md hover:transform hover:-translate-y-2 transition duration-300">
+                    <div class="text-4xl text-love-pink mb-4"><i class="fa-solid fa-utensils"></i></div>
+                    <h4 class="font-bold text-xl mb-2">Comida de Mãe</h4>
+                    <p class="text-sm text-gray-500">Já estamos sonhando com aquelas delícias que só você sabe fazer (mas hoje, a gente cozinha!).</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-white p-6 rounded-2xl shadow-md hover:transform hover:-translate-y-2 transition duration-300">
+                    <div class="text-4xl text-love-pink mb-4"><i class="fa-solid fa-infinity"></i></div>
+                    <h4 class="font-bold text-xl mb-2">Amor Eterno</h4>
+                    <p class="text-sm text-gray-500">A distância separa corpos, mas nunca corações. Te amo demais!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galeria Simples (Decorativa) -->
+    <section class="py-10 pb-20 z-10 relative">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <h3 class="hero-text text-5xl text-love-pink mb-10">Momentos Especiais</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- Imagens Placeholder (substitua por fotos reais se desejar editar o código) -->
+                <div class="relative group overflow-hidden rounded-xl shadow-lg h-64">
+                    <img src="https://images.unsplash.com/photo-1490750967868-58cb75063ed4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Flores" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <span class="text-white font-bold text-lg">Amor</span>
+                    </div>
+                </div>
+                <div class="relative group overflow-hidden rounded-xl shadow-lg h-64 md:-mt-8">
+                    <img src="https://images.unsplash.com/photo-1516572571765-6677443e06a5?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Carinho" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <span class="text-white font-bold text-lg">Família</span>
+                    </div>
+                </div>
+                <div class="relative group overflow-hidden rounded-xl shadow-lg h-64">
+                    <img src="https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Saudade" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <span class="text-white font-bold text-lg">União</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer em Alemão/Português -->
+    <footer class="bg-white py-8 text-center border-t border-pink-100 z-10 relative">
+        <p class="text-2xl text-gray-400 font-light mb-2">Willkommen zurück!</p>
+        <p class="text-love-pink hero-text text-4xl">Te amo infinitamente.</p>
+        <p class="text-xs text-gray-300 mt-4">Feito com muito amor pelo seu filho(a)</p>
+    </footer>
+
+    <!-- Script para os Corações -->
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            
+            // Escolher aleatoriamente entre ícones de coração e emojis
+            const icons = ['❤️', '💖', '🌸', '✨', '💗'];
+            heart.innerText = icons[Math.floor(Math.random() * icons.length)];
+            
+            // Posição horizontal aleatória
+            heart.style.left = Math.random() * 100 + 'vw';
+            
+            // Tamanho aleatório
+            const size = Math.random() * 20 + 10 + 'px'; // Entre 10px e 30px
+            heart.style.fontSize = size;
+            
+            // Duração da animação aleatória (velocidade de queda)
+            heart.style.animationDuration = Math.random() * 3 + 3 + 's'; // Entre 3s e 6s
+            
+            document.body.appendChild(heart);
+            
+            // Remover o coração do DOM após a animação terminar para não pesar o site
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+
+        // Criar um coração a cada 300ms
+        setInterval(createHeart, 300);
+
+        // Chuva inicial de corações ao carregar
+        for(let i = 0; i < 20; i++) {
+            setTimeout(createHeart, i * 100);
+        }
+    </script>
+</body>
+</html>
+
